@@ -1,0 +1,110 @@
+--[[
+    ARII HUB
+    Interfaz rosa pastel para Roblox
+    Creado para Roblox Studio
+]]
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- COLORES
+local PINK = Color3.fromRGB(255, 170, 210)
+local LIGHT_PINK = Color3.fromRGB(255, 220, 238)
+local DARK = Color3.fromRGB(30, 20, 30)
+local WHITE = Color3.fromRGB(255, 255, 255)
+local BLUE = Color3.fromRGB(100, 170, 255)
+local RED = Color3.fromRGB(255, 80, 100)
+
+-- ESTADO
+local espEnabled = false
+local hitboxEnabled = false
+local autoShootEnabled = false
+local menuOpen = true
+local espObjects = {}
+
+-- INTERFAZ
+local gui = Instance.new("ScreenGui")
+gui.Name = "AriiHub"
+gui.ResetOnSpawn = false
+gui.IgnoreGuiInset = false
+gui.Parent = playerGui
+
+-- VENTANA PRINCIPAL
+local main = Instance.new("Frame")
+main.Name = "Main"
+main.Size = UDim2.fromOffset(300, 390)
+main.Position = UDim2.new(0.5, -150, 0.5, -195)
+main.BackgroundColor3 = DARK
+main.BorderSizePixel = 0
+main.Parent = gui
+
+local mainCorner = Instance.new("UICorner")
+mainCorner.CornerRadius = UDim.new(0, 15)
+mainCorner.Parent = main
+
+local outline = Instance.new("UIStroke")
+outline.Color = PINK
+outline.Thickness = 2
+outline.Parent = main
+
+-- TITULO
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -90, 0, 45)
+title.Position = UDim2.fromOffset(12, 4)
+title.BackgroundTransparency = 1
+title.Text = "🎀 ARII HUB"
+title.TextColor3 = PINK
+title.TextSize = 23
+title.Font = Enum.Font.GothamBold
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = main
+
+-- BOTON MINIMIZAR
+local minimize = Instance.new("TextButton")
+minimize.Size = UDim2.fromOffset(35, 32)
+minimize.Position = UDim2.new(1, -78, 0, 8)
+minimize.BackgroundColor3 = PINK
+minimize.Text = "—"
+minimize.TextColor3 = DARK
+minimize.TextSize = 22
+minimize.Font = Enum.Font.GothamBold
+minimize.Parent = main
+
+Instance.new("UICorner", minimize).CornerRadius =
+    UDim.new(0, 8)
+
+-- BOTON CERRAR
+local close = Instance.new("TextButton")
+close.Size = UDim2.fromOffset(35, 32)
+close.Position = UDim2.new(1, -40, 0, 8)
+close.BackgroundColor3 = RED
+close.Text = "X"
+close.TextColor3 = WHITE
+close.TextSize = 17
+close.Font = Enum.Font.GothamBold
+close.Parent = main
+
+Instance.new("UICorner", close).CornerRadius =
+    UDim.new(0, 8)
+
+-- CONTENEDOR
+local content = Instance.new("Frame")
+content.Size = UDim2.new(1, -20, 1, -65)
+content.Position = UDim2.fromOffset(10, 55)
+content.BackgroundTransparency = 1
+content.Parent = main
+
+local layout = Instance.new("UIListLayout")
+layout.Padding = UDim.new(0, 8)
+layout.SortOrder = Enum.SortOrder.LayoutOrder
+layout.Parent = content
+
+-- CREAR BOTONES
+local function createButton(text, color, callback)
+    local button = Instance.new("TextButton")
+
+    button.Size = UDim2.new(1, 0, 0, 43
